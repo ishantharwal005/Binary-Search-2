@@ -23,8 +23,9 @@
 
 class Solution {
     public int findMin(int[] nums) {
+        // Base Case
         if(nums.length == 1){
-            return nums[0];
+            return nums[0]; // Only one element
         }
 
         int low = 0;
@@ -34,17 +35,21 @@ class Solution {
                 return nums[low];
             }
             int mid = low + (high - low) / 2; // To prevent Integer Overflow
+
+            // Check if mid is the pivot point (i.e. the smallest element)
             if((mid == 0 || nums[mid] < nums[mid - 1]) && (mid == nums.length - 1 || nums[mid] < nums[mid + 1])){
                 return nums[mid];
             }
+            
+            // Left half is sorted → min must be in right half
             if(nums[low] <= nums[mid]){
                 low = mid + 1;
             }
-            else {
+            else { // Right half is sorted → min is in left half
                 high = mid - 1;
             }
         }
-        return 54569;
+        return -1; // Should never reach here with valid rotated sorted input
 
     }
 }
